@@ -1,6 +1,6 @@
 # Mudanzingo Dashboard SPA
 
-Dashboard SPA construido con React + Vite + TypeScript. Incluye TailwindCSS, React Router, TanStack Query, Amplify Auth (Hosted UI con Authorization Code Flow + PKCE), tema claro/oscuro, componentes UI simples y manejo de productos.
+Dashboard SPA construido con React + Vite + TypeScript. Incluye TailwindCSS, React Router, TanStack Query, Amplify Auth (Hosted UI con Authorization Code Flow + PKCE), tema claro/oscuro, componentes UI simples y manejo de productos.d
 
 ## Características
 - Autenticación Cognito Hosted UI (AWS Amplify Auth)
