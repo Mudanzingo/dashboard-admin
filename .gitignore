@@ -1,0 +1,65 @@
+# --- Dependencias ---
+node_modules/
+
+# --- Builds / Bundles ---
+dist/
+build/
+# Vite cache
+.vite/
+.vite-cache/
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Cobertura / Testing ---
+coverage/
+.nyc_output/
+
+# --- Env / Secrets ---
+.env
+.env.*
+!.env.example
+
+# --- AWS Amplify (si se usa CLI) ---
+amplify/# backend artifacts
+amplify/.config/
+amplify/# other generated configs
+amplify/team-provider-info.json
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- SO / Misceláneos ---
+.DS_Store
+Thumbs.db
+
+# --- ESLint / Cache ---
+.eslintcache
+
+# --- Tailwind / PostCSS temp ---
+*.css.map
+
+# --- Otros caches ---
+.cache/
+.turbo/
+
+# --- Amplify Generated Files (JS) ---
+aws-exports.js
+aws-exports.ts
+
+# --- Optional: lockfiles (mantenerlos para reproducibilidad) ---
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# --- Seguridad: evitar subir debug dumps ---
+*.stackdump
