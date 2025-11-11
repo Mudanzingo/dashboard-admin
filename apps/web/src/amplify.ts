@@ -19,7 +19,9 @@ const config = {
     userPoolWebClientId: import.meta.env.VITE_AMPLIFY_USER_POOL_CLIENT_ID,
     oauth: {
       domain: import.meta.env.VITE_AMPLIFY_COGNITO_DOMAIN,
-      scope: (import.meta.env.VITE_AMPLIFY_OAUTH_SCOPES || 'openid profile email').split(',').map(s => s.trim()),
+      scope: (import.meta.env.VITE_AMPLIFY_OAUTH_SCOPES || 'openid profile email')
+        .split(',')
+        .map((s: string) => s.trim()),
       redirectSignIn: pickRedirect(import.meta.env.VITE_AMPLIFY_REDIRECT_SIGN_IN),
       redirectSignOut: pickRedirect(import.meta.env.VITE_AMPLIFY_REDIRECT_SIGN_OUT),
       responseType: 'code', // Authorization Code Flow with PKCE

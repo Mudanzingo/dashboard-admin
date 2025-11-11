@@ -1,20 +1,15 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 
-// Nuevo esquema de productos
-export const ProductSchema = z.object({
+export const CategorySchema = z.object({
   id: z.string().optional(),
   name: z.string().min(2, 'El nombre es obligatorio'),
-  image: z.string().url('Debe ser una URL válida').or(z.literal('').transform(() => '')),
-  description: z.string().max(1000).or(z.literal('')).default(''),
-  quantity: z.coerce.number().int().nonnegative('Debe ser >= 0'),
-  price: z.coerce.number().nonnegative('Debe ser >= 0'),
 });
-export type Product = z.infer<typeof ProductSchema>;
+export type Category = z.infer<typeof CategorySchema>;
 
-const STORAGE_KEY = 'products-items';
+const STORAGE_KEY = 'categories-items';
 
-function readStore(): Product[] {
+function readStore(): Category[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
@@ -26,13 +21,13 @@ function readStore(): Product[] {
   }
 }
 
-function writeStore(items: Product[]) {
+function writeStore(items: Category[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
 }
 
-export function useProducts() {
-  return useQuery<Product[]>({
-    queryKey: ['products'],
+export function useCategories() {
+  return useQuery<Category[]>({
+    queryKey: ['categories'],
     queryFn: async () => {
       await new Promise((r) => setTimeout(r, 150));
       return readStore();
@@ -40,40 +35,40 @@ export function useProducts() {
   });
 }
 
-export function useCreateProduct() {
+export function useCreateCategory() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (data: Omit<Product, 'id'>) => {
-      const payload = ProductSchema.omit({ id: true }).parse(data);
-      const created: Product = { id: crypto.randomUUID(), ...payload };
+    mutationFn: async (data: Omit<Category, 'id'>) => {
+      const payload = CategorySchema.omit({ id: true }).parse(data);
+      const created: Category = { id: crypto.randomUUID(), ...payload };
       const current = readStore();
       const next = [...current, created];
       writeStore(next);
       return created;
     },
     onSuccess: (created) => {
-      qc.setQueryData<Product[]>(['products'], (old = []) => [...old, created]);
+      qc.setQueryData<Category[]>(['categories'], (old = []) => [...old, created]);
     },
   });
 }
 
-export function useUpdateProduct() {
+export function useUpdateCategory() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (data: Product) => {
-      const payload = ProductSchema.parse(data);
+    mutationFn: async (data: Category) => {
+      const payload = CategorySchema.parse(data);
       const current = readStore();
       const next = current.map((it) => (it.id === payload.id ? payload : it));
       writeStore(next);
       return payload;
     },
     onSuccess: (updated) => {
-      qc.setQueryData<Product[]>(['products'], (old = []) => old.map((it) => (it.id === updated.id ? updated : it)));
+      qc.setQueryData<Category[]>(['categories'], (old = []) => old.map((it) => (it.id === updated.id ? updated : it)));
     },
   });
 }
 
-export function useDeleteProduct() {
+export function useDeleteCategory() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
@@ -83,7 +78,7 @@ export function useDeleteProduct() {
       return id;
     },
     onSuccess: (id) => {
-      qc.setQueryData<Product[]>(['products'], (old = []) => old.filter((it) => it.id !== id));
+      qc.setQueryData<Category[]>(['categories'], (old = []) => old.filter((it) => it.id !== id));
     },
   });
 }

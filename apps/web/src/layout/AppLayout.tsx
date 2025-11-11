@@ -33,6 +33,12 @@ export function AppLayout() {
         <nav className="flex flex-col gap-1 text-sm">
           <NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'font-semibold' : '')}>Dashboard</NavLink>
           <NavLink to="/products" className={({ isActive }) => (isActive ? 'font-semibold' : '')}>Productos</NavLink>
+          <NavLink to="/inventario" className={({ isActive }) => (isActive ? 'font-semibold' : '')}>Inventario</NavLink>
+          <NavLink to="/categorias" className={({ isActive }) => (isActive ? 'font-semibold' : '')}>Categorías</NavLink>
+          <NavLink to="/servicios" className={({ isActive }) => (isActive ? 'font-semibold' : '')}>Servicios</NavLink>
+          <NavLink to="/cotizaciones" className={({ isActive }) => (isActive ? 'font-semibold' : '')}>Cotizaciones</NavLink>
+          <NavLink to="/vendedores" className={({ isActive }) => (isActive ? 'font-semibold' : '')}>Vendedores</NavLink>
+          <NavLink to="/proveedores" className={({ isActive }) => (isActive ? 'font-semibold' : '')}>Proveedores</NavLink>
         </nav>
         <div className="mt-auto flex flex-col gap-2 text-xs">
           <ThemeToggle />
